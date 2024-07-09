@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/conrainer_widget.dart';
 import 'package:myapp/news_container.dart';
+import 'package:myapp/row_column/biodata_widget.dart';
+import 'package:myapp/row_column/column_widget.dart';
+import 'package:myapp/row_column/row_column.dart';
+import 'package:myapp/row_column/row_widget.dart';
+import 'package:myapp/row_column/tugas1_widget.dart';
 
 void main(){
   runApp(MyApp());
@@ -15,13 +20,24 @@ class MyApp extends StatelessWidget{
       home: Scaffold(
         backgroundColor: Colors.teal,
         appBar: AppBar(
-          title: Text('Belajar Fluuter'),
+          title: Text('Biodata'),
           centerTitle: true,
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: Colors.grey,
         ),
-      body: name(),
+      body: Biodata(),
       ),
     );
+  }
+}
+
+class BelajarRow extends StatelessWidget {
+  const BelajarRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BelajarRow();
   }
 }
 
