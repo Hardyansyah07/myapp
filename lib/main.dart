@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/conrainer_widget.dart';
+import 'package:myapp/counter_page.dart';
+import 'package:myapp/form/display_page.dart';
+import 'package:myapp/form/form_page.dart';
 import 'package:myapp/news_container.dart';
 import 'package:myapp/row_column/biodata_widget.dart';
 import 'package:myapp/row_column/column_widget.dart';
@@ -20,11 +23,11 @@ class MyApp extends StatelessWidget{
       home: Scaffold(
         backgroundColor: Colors.teal,
         appBar: AppBar(
-          title: Text('Biodata'),
+          title: Text('Belajar'),
           centerTitle: true,
           backgroundColor: Colors.grey,
         ),
-      body: Biodata(),
+      body: FormPage(),
       ),
     );
   }
