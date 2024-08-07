@@ -1,76 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/conrainer_widget.dart';
-import 'package:myapp/counter_page.dart';
-import 'package:myapp/form/display_page.dart';
-import 'package:myapp/form/form_page.dart';
-import 'package:myapp/news_container.dart';
-import 'package:myapp/row_column/biodata_widget.dart';
-import 'package:myapp/row_column/column_widget.dart';
-import 'package:myapp/row_column/row_column.dart';
-import 'package:myapp/row_column/row_widget.dart';
-import 'package:myapp/row_column/tugas1_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'pages/auth/login_page.dart';
+import 'pages/auth/register_page.dart';
+import 'pages/auth/home_page.dart';
 
-void main(){
+void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
-  const MyApp({Key? Key}) : super(key: Key);
+class MyApp extends StatelessWidget {
+  Future<bool> checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token') != null;
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.teal,
-        appBar: AppBar(
-          title: Text('Belajar'),
-          centerTitle: true,
-          backgroundColor: Colors.grey,
-        ),
-      body: FormPage(),
+      title: 'Flutter Auth',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
       ),
-    );
-  }
-}
-
-class BelajarRow extends StatelessWidget {
-  const BelajarRow({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BelajarRow();
-  }
-}
-
-class ContainerWidget extends StatelessWidget {
-  const ContainerWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ConrainerWidget();
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Hello World',
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-        backgroundColor: Colors.black26
+      home: FutureBuilder<bool>(
+        future: checkLoginStatus(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.data == true) {
+            return HomePage();
+          } else {
+            return LoginPage();
+          }
+        },
       ),
-      ),
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/home': (context) => HomePage(),
+      },
     );
   }
 }

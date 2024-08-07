@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp/form/display_page.dart';
+import 'package:myapp/pages/form/display_page.dart';
 
 class FormPage extends StatefulWidget {
   @override
