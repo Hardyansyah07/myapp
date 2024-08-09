@@ -1,13 +1,13 @@
-class kategori {
-  String? success;
-  String? message;
+class Kategori {
+  bool? succes;
+  String? messages;
   List<Data>? data;
 
-  kategori({this.success, this.message, this.data});
+  Kategori({this.succes, this.messages, this.data});
 
-  kategori.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
+  Kategori.fromJson(Map<String, dynamic> json) {
+    succes = json['succes'];
+    messages = json['messages'];
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -18,8 +18,8 @@ class kategori {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
+    data['succes'] = this.succes;
+    data['messages'] = this.messages;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -30,14 +30,16 @@ class kategori {
 class Data {
   int? id;
   String? namaKategori;
+  String? slug;
   String? createdAt;
   String? updatedAt;
 
-  Data({this.id, this.namaKategori, this.createdAt, this.updatedAt});
+  Data({this.id, this.namaKategori, this.slug, this.createdAt, this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     namaKategori = json['nama_kategori'];
+    slug = json['slug'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -46,6 +48,7 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['nama_kategori'] = this.namaKategori;
+    data['slug'] = this.slug;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

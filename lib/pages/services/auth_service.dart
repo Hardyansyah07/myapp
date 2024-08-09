@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final String _baseUrl = 'https://apihardy.69dev.id/api';
+  final String _baseUrl = 'https://movieapi.smkassalaambandung.sch.id/api';
 
   Future<bool> login(String email, String password) async {
     final response = await http.post(

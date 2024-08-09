@@ -2,17 +2,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:myapp/models/kategori_model.dart';
 
-import 'package:myapp/pages/services/kategori_service.dart';
-
 class KategoriService {
-  final String _baseUrl = 'https://apihardy.69dev.id/api';
+  final String _baseUrl = 'https://movieapi.smkassalaambandung.sch.id/api';
 
-  Future<kategori?> fetchKategori() async {
+  Future<Kategori?> fetchKategori() async {
     try {
       final response = await http.get(Uri.parse('$_baseUrl/kategori'));
 
       if (response.statusCode == 200) {
-        return kategori.fromJson(json.decode(response.body));
+        return Kategori.fromJson(json.decode(response.body));
       } else {
         throw Exception('Failed to load kategori');
       }
@@ -20,5 +18,29 @@ class KategoriService {
       print('Error: $e');
       return null;
     }
+  }
+
+  Future<bool> storeKategori(String namaKategori) async {
+    final response = await http.post(
+      Uri.parse('$_baseUrl/kategori'),
+      body: {'nama_kategori': namaKategori},
+    );
+
+    return response.statusCode == 201;
+  }
+
+  Future<bool> updateKategori(int id, String namaKategori) async {
+    final response = await http.put(
+      Uri.parse('$_baseUrl/kategori/$id'),
+      body: {'nama_kategori': namaKategori},
+    );
+
+    return response.statusCode == 200;
+  }
+
+  Future<bool> deleteKategori(int id) async {
+    final response = await http.delete(Uri.parse('$_baseUrl/kategori/$id'));
+
+    return response.statusCode == 200;
   }
 }
